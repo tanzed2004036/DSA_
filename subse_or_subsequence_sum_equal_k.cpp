@@ -8,11 +8,12 @@ int a[N];
 
 bool fun(int i,int k){
     if(k==0)return true;
-    if(i<0)return false;
+    if(i<0)return false;                      // (i>=n)
     if(dp[i][k]!=-1) return dp[i][k];
-    // not take 
-    bool is=fun(i-1,k);
+    // not take a[i]
+    bool is=fun(i-1,k);                       // fun(i+1,k)
     if(k-a[i]>=0)
+        // take a[i]
         is = is || fun(i-1,k-a[i]);
 
     return dp[i][k]=is;
@@ -24,7 +25,7 @@ int main()
     int k;
     cin>>n>>k;
     for(int i=0;i<n;i++)cin>>a[i];
-    bool ans=fun(n-1,k);
+    bool ans=fun(n-1,k);               // can be used fun(0,k)
     if(ans)cout<<"yes"<<endl;
     else cout<<"no"<<endl;
 }
